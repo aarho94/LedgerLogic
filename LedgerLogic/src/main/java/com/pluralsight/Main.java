@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Ledger ledger = new Ledger(); // Assuming Ledger class manages ledger entries
+        com.pluralsight.Ledger ledger = new com.pluralsight.Ledger(); // Assuming Ledger class manages ledger entries
 
         // Main menu loop
         boolean running = true;
