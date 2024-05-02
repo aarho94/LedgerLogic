@@ -1,11 +1,13 @@
-package com.pluralsight;
+package com.pluralsight.application;
+
+import com.pluralsight.services.Ledger;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        com.pluralsight.Ledger ledger = new com.pluralsight.Ledger(); // Assuming Ledger class manages ledger entries
+        Ledger ledger = new Ledger();
 
         // Main menu loop
         boolean running = true;
@@ -94,4 +96,3 @@ public class Main {
         scanner.close();
     }
 }
-

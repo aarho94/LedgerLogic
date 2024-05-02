@@ -1,11 +1,13 @@
-package com.pluralsight;
+package com.pluralsight.services;
+
+import com.pluralsight.models.LedgerEntry;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ledger {
-    private List<com.pluralsight.LedgerEntry> entries;
+    private List<LedgerEntry> entries;
     private static final String FILE_PATH = "ledger.csv";
 
     public Ledger() {
