@@ -31,7 +31,7 @@ public class Ledger {
     }
 
     public void makePayment(String date, String time, String description, String vendor, double amount) {
-        entries.add(new LedgerEntry(date, time, description, vendor, -amount)); // negative amount for payments
+        entries.add(new LedgerEntry(date, time, description, vendor, -amount));
         saveEntriesToFile();
         System.out.println("Payment made successfully.");
     }
