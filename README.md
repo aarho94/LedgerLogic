@@ -105,3 +105,18 @@ Search Report
 Previous Year Report
 
 ![PreviousYear](https://github.com/aarho94/LedgerLogic/assets/166449365/ebed7c85-35a0-4f8d-a33d-d56cf3fc013c)
+
+
+I would like to highlight that I got a lot of joy out of figuring out how to use the LocalDate class; here is one of the ways I implemented it in a method for generating a report: 
+
+    public void generateMonthToDateReport() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDateOfMonth = currentDate.withDayOfMonth(1); // Get the first day of the current month
+        LocalDate endDateOfMonth = currentDate; // Current date
+
+        List<LedgerEntry> monthToDateEntries = filterEntries(startDateOfMonth, endDateOfMonth);
+
+        printReport("Month To Date", monthToDateEntries);
+    }
+
+
