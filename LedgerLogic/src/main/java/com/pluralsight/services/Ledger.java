@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Ledger {
     private List<LedgerEntry> entries;
-    private static final String FILE_PATH = "ledger.csv";
+    private static final String FILE_PATH = "src/main/java/com/pluralsight/files/ledger.csv";
 
     public Ledger() {
         // Initialize the list of ledger entries
