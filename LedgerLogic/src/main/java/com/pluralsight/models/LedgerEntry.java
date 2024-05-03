@@ -16,38 +16,31 @@ public class LedgerEntry {
     }
 
     public String getDate() {
-        return date.toString(); // Assuming 'date' is a LocalDate object
+        return date;
     }
 
     public String getTime() {
-        return time.toString(); // Assuming 'time' is a LocalTime object
+        return time;
     }
 
-    public String getDescription()
-        {
-            return description;
-        }
-
-        public String getVendor()
-        {
-         return vendor;
-        }
-
-        public double getAmount()
-        {
-            return amount;
-        }
-
-        public String toString()
-        {
-            return "Date: " + date + ", Description: " + description + ", Amount: " + amount;
-        }
-
-        public String toCSV()
-        {
-            return date + "," + description + "," + amount;
-        }
+    public String getDescription() {
+        return description;
     }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Date: " + date + ", Time: " + time + ", Description: " + description + ", Vendor: " + vendor + ", Amount: " + amount;
+    }
+}
+
 
 
 

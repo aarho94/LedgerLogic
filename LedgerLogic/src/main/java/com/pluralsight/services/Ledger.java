@@ -3,6 +3,7 @@ package com.pluralsight.services;
 import com.pluralsight.models.LedgerEntry;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,36 +14,28 @@ public class Ledger {
     private Scanner scanner;
 
     public Ledger() {
-
-        // Initialize the list of ledger entries
-        entries = new ArrayList<>();
-        // Load existing entries from the CSV file (if any)
-        loadEntriesFromFile();
-    }
-
-    public Ledger(Scanner scanner)
-    {
-        this.scanner = scanner; // Initialize the scanner field
         entries = new ArrayList<>();
         loadEntriesFromFile();
     }
 
-    // Method to add a deposit entry to the ledger
+    public Ledger(Scanner scanner) {
+        this.scanner = scanner;
+        entries = new ArrayList<>();
+        loadEntriesFromFile();
+    }
+
     public void addDeposit(String date, String time, String description, String vendor, double amount) {
         entries.add(new LedgerEntry(date, time, description, vendor, amount));
         saveEntriesToFile();
         System.out.println("Deposit added successfully.");
     }
 
-    // Method to make a payment (debit) entry to the ledger
     public void makePayment(String date, String time, String description, String vendor, double amount) {
         entries.add(new LedgerEntry(date, time, description, vendor, -amount)); // negative amount for payments
         saveEntriesToFile();
         System.out.println("Payment made successfully.");
     }
 
-    // Method to display all ledger entries
-// Method to display all ledger entries in batches of 10
     public void displayLedger() {
         if (entries.isEmpty()) {
             System.out.println("Ledger is empty.");
@@ -65,12 +58,82 @@ public class Ledger {
         }
     }
 
+    public void generateMonthToDateReport() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDateOfMonth = currentDate.withDayOfMonth(1); // Get the first day of the current month
+        LocalDate endDateOfMonth = currentDate; // Current date
 
-    // Method to save ledger entries to the CSV file
+        List<LedgerEntry> monthToDateEntries = filterEntries(startDateOfMonth, endDateOfMonth);
+
+        printReport("Month To Date", monthToDateEntries);
+    }
+
+    public void generateYearToDateReport() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDateOfYear = LocalDate.of(currentDate.getYear(), 1, 1); // Get the first day of the current year
+        LocalDate endDateOfYear = currentDate; // Current date
+
+        List<LedgerEntry> yearToDateEntries = filterEntries(startDateOfYear, endDateOfYear);
+
+        printReport("Year To Date", yearToDateEntries);
+    }
+
+    public void generatePreviousMonthReport() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDateOfPreviousMonth = currentDate.minusMonths(1).withDayOfMonth(1); // Get the first day of the previous month
+        LocalDate endDateOfPreviousMonth = currentDate.minusMonths(1); // Last day of the previous month
+
+        List<LedgerEntry> previousMonthEntries = filterEntries(startDateOfPreviousMonth, endDateOfPreviousMonth);
+
+        printReport("Previous Month", previousMonthEntries);
+    }
+
+    public void generatePreviousYearReport() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 1, 1); // Get the first day of the previous year
+        LocalDate endDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 12, 31); // Last day of the previous year
+
+        List<LedgerEntry> previousYearEntries = filterEntries(startDateOfPreviousYear, endDateOfPreviousYear);
+
+        printReport("Previous Year", previousYearEntries);
+    }
+
+    public void searchByVendor(String vendorName) {
+        List<LedgerEntry> vendorEntries = new ArrayList<>();
+        for (LedgerEntry entry : entries) {
+            if (entry.getVendor().equalsIgnoreCase(vendorName)) {
+                vendorEntries.add(entry);
+            }
+        }
+
+        printReport("Entries for Vendor: " + vendorName, vendorEntries);
+    }
+
+    private List<LedgerEntry> filterEntries(LocalDate startDate, LocalDate endDate) {
+        List<LedgerEntry> filteredEntries = new ArrayList<>();
+        for (LedgerEntry entry : entries) {
+            LocalDate entryDate = LocalDate.parse(entry.getDate());
+            if (!entryDate.isBefore(startDate) && !entryDate.isAfter(endDate)) {
+                filteredEntries.add(entry);
+            }
+        }
+        return filteredEntries;
+    }
+
+    private void printReport(String reportName, List<LedgerEntry> reportEntries) {
+        if (reportEntries.isEmpty()) {
+            System.out.println("No entries for " + reportName);
+        } else {
+            System.out.println("=== " + reportName + " Report ===");
+            for (LedgerEntry entry : reportEntries) {
+                System.out.println(entry);
+            }
+        }
+    }
+
     private void saveEntriesToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (LedgerEntry entry : entries) {
-                // Write the entry in the format: date|time|description|vendor|amount
                 writer.println(entry.getDate() + "|" + entry.getTime() + "|" + entry.getDescription() + "|" + entry.getVendor() + "|" + entry.getAmount());
             }
         } catch (IOException e) {
@@ -78,12 +141,9 @@ public class Ledger {
         }
     }
 
-
-    // Method to load ledger entries from the CSV file
     private void loadEntriesFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            int lineNumber = 1;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
                 if (parts.length == 5) {
@@ -91,35 +151,14 @@ public class Ledger {
                         double amount = Double.parseDouble(parts[4]);
                         entries.add(new LedgerEntry(parts[0], parts[1], parts[2], parts[3], amount));
                     } catch (NumberFormatException e) {
-                        System.err.println("Invalid amount format in line " + lineNumber + ": " + parts[4]);
+                        System.err.println("Invalid amount format: " + parts[4]);
                     }
                 } else {
-                    System.err.println("Invalid entry format in line " + lineNumber + ": " + line);
+                    System.err.println("Invalid entry format: " + line);
                 }
-                lineNumber++;
             }
         } catch (IOException e) {
             System.err.println("Error loading ledger entries from file: " + e.getMessage());
         }
     }
-
-
-
-
-    // Optional: method to search for entries by vendor name
-    public void searchByVendor(String vendorName) {
-        System.out.println("=== Entries for Vendor: " + vendorName + " ===");
-        boolean found = false;
-        for (LedgerEntry entry : entries) {
-            if (entry.getVendor().equalsIgnoreCase(vendorName)) {
-                System.out.println(entry);
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("No entries found for vendor: " + vendorName);
-        }
-    }
 }
-
-
