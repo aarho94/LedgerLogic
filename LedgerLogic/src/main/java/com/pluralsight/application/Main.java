@@ -86,7 +86,7 @@ public class Main {
         double amount = scanner.nextDouble();
         scanner.nextLine(); // Consume newline character
         ledger.makePayment(formattedDate, formattedTime, description, vendor, amount);
-        System.out.println("Payment made successfully.");
+        System.out.println("Payment added successfully.");
     }
 
     private static void runReports(Scanner scanner, Ledger ledger) {
