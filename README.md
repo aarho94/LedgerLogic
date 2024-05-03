@@ -65,3 +65,23 @@ Step 10: Final Review and Submission
 -Make any final adjustments if needed.
 
 Navigation:
+
+![Home](https://github.com/aarho94/LedgerLogic/assets/166449365/7b15c079-29a8-420c-a630-ae750a945314)
+
+![Deposit](https://github.com/aarho94/LedgerLogic/assets/166449365/2c78c0fe-7139-444a-9cda-0155f1816c48)
+
+![Payment](https://github.com/aarho94/LedgerLogic/assets/166449365/26dc1479-b517-4722-bd9c-7fcb4342fc93)
+
+![Ledger](https://github.com/aarho94/LedgerLogic/assets/166449365/008aa907-a1b8-42f2-945b-2bb3adee95dd)
+
+![Reports](https://github.com/aarho94/LedgerLogic/assets/166449365/c721493b-bb49-4a74-8237-c581271530b5)
+
+![MonthToDate](https://github.com/aarho94/LedgerLogic/assets/166449365/9869403c-8ef2-474f-8c46-4468ef4c401c)
+
+![PreviousMonth](https://github.com/aarho94/LedgerLogic/assets/166449365/22c1dd0b-bdd3-4d62-9d0a-d1d38144396a)
+
+![YearToDate](https://github.com/aarho94/LedgerLogic/assets/166449365/616294da-2549-4720-882f-4aff7b354be6)
+
+![Search](https://github.com/aarho94/LedgerLogic/assets/166449365/1d2c86b0-2846-4773-85cb-50689701e51e)
+
+![PreviousYear](https://github.com/aarho94/LedgerLogic/assets/166449365/ebed7c85-35a0-4f8d-a33d-d56cf3fc013c)
