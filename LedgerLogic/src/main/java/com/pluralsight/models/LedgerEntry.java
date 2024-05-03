@@ -15,12 +15,15 @@ public class LedgerEntry {
         this.amount = amount;
     }
 
-        public String getDate()
-        {
-            return date;
-        }
+    public String getDate() {
+        return date.toString(); // Assuming 'date' is a LocalDate object
+    }
 
-        public String getDescription()
+    public String getTime() {
+        return time.toString(); // Assuming 'time' is a LocalTime object
+    }
+
+    public String getDescription()
         {
             return description;
         }

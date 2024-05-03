@@ -70,12 +70,14 @@ public class Ledger {
     private void saveEntriesToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (LedgerEntry entry : entries) {
-                writer.println(entry.toCSV());
+                // Write the entry in the format: date|time|description|vendor|amount
+                writer.println(entry.getDate() + "|" + entry.getTime() + "|" + entry.getDescription() + "|" + entry.getVendor() + "|" + entry.getAmount());
             }
         } catch (IOException e) {
             System.err.println("Error saving ledger entries to file: " + e.getMessage());
         }
     }
+
 
     // Method to load ledger entries from the CSV file
     private void loadEntriesFromFile() {
@@ -100,6 +102,8 @@ public class Ledger {
             System.err.println("Error loading ledger entries from file: " + e.getMessage());
         }
     }
+
+
 
 
     // Optional: method to search for entries by vendor name
