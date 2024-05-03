@@ -1,4 +1,3 @@
-date|time|description|vendor|amount
 2023-11-01|09:00:00|Deposit|Salary|3000.00
 2023-11-02|12:30:00|Payment|Rent|-1000.00
 2023-11-05|10:15:00|Deposit|Freelance Work|1500.00
@@ -64,4 +63,3 @@ date|time|description|vendor|amount
 2024-07-25|11:45:00|Deposit|Rent Payment|1200.00
 2024-07-30|12:00:00|Payment|Water Bill|-90.00
 2024-08-02|09:15:00|Deposit|Consultation Fee|1500.00
-

@@ -2,12 +2,14 @@ package com.pluralsight.application;
 
 import com.pluralsight.services.Ledger;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Ledger ledger = new Ledger();
+        Ledger ledger = new Ledger(scanner);
 
         // Main menu loop
         boolean running = true;
@@ -25,20 +27,43 @@ public class Main {
                 case "D":
                     // Add Deposit
                     System.out.println("Adding Deposit...");
-                    // Prompt user for deposit information and save it to the ledger
-                    // Example: ledger.addDeposit(...);
+                    LocalDateTime depositDateTime = LocalDateTime.now();
+                    String formattedDate = depositDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String formattedTime = depositDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                    System.out.println("Automatically populated date: " + formattedDate);
+                    System.out.println("Automatically populated time: " + formattedTime);
+                    System.out.print("Enter description: ");
+                    String description = scanner.nextLine();
+                    System.out.print("Enter vendor: ");
+                    String vendor = scanner.nextLine();
+                    System.out.print("Enter amount: ");
+                    double amount = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline character
+                    ledger.addDeposit(formattedDate, formattedTime, description, vendor, amount);
+                    System.out.println("Deposit added successfully.");
                     break;
                 case "P":
                     // Make Payment (Debit)
                     System.out.println("Making Payment...");
-                    // Prompt user for payment information and save it to the ledger
-                    // Example: ledger.makePayment(...);
+                    LocalDateTime paymentDateTime = LocalDateTime.now();
+                    formattedDate = paymentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    formattedTime = paymentDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                    System.out.println("Automatically populated date: " + formattedDate);
+                    System.out.println("Automatically populated time: " + formattedTime);
+                    System.out.print("Enter description: ");
+                    description = scanner.nextLine();
+                    System.out.print("Enter vendor: ");
+                    vendor = scanner.nextLine();
+                    System.out.print("Enter amount: ");
+                    amount = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline character
+                    ledger.makePayment(formattedDate, formattedTime, description, vendor, amount);
+                    System.out.println("Payment made successfully.");
                     break;
                 case "L":
                     // Display Ledger
                     System.out.println("=== Ledger ===");
-                    // Display ledger entries (newest entries first)
-                    // Example: ledger.displayLedger();
+                    ledger.displayLedger();
                     break;
                 case "R":
                     // Reports
@@ -96,3 +121,5 @@ public class Main {
         scanner.close();
     }
 }
+
+
