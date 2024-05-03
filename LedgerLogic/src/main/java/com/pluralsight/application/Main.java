@@ -24,24 +24,19 @@ public class Main {
 
             switch (choice) {
                 case "D":
-                    // Add Deposit
                     addDeposit(scanner, ledger);
                     break;
                 case "P":
-                    // Make Payment (Debit)
                     makePayment(scanner, ledger);
                     break;
                 case "L":
-                    // Display Ledger
                     System.out.println("=== Ledger ===");
                     ledger.displayLedger();
                     break;
                 case "R":
-                    // Reports
                     runReports(scanner, ledger);
                     break;
                 case "X":
-                    // Exit
                     System.out.println("Exiting...");
                     running = false;
                     break;
@@ -66,7 +61,7 @@ public class Main {
         String vendor = scanner.nextLine();
         System.out.print("Enter amount: ");
         double amount = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine();
         ledger.addDeposit(formattedDate, formattedTime, description, vendor, amount);
         System.out.println("Deposit added successfully.");
     }
@@ -84,7 +79,7 @@ public class Main {
         String vendor = scanner.nextLine();
         System.out.print("Enter amount: ");
         double amount = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine();
         ledger.makePayment(formattedDate, formattedTime, description, vendor, amount);
         System.out.println("Payment added successfully.");
     }
