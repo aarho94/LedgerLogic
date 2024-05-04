@@ -111,7 +111,7 @@ public class Main {
                     ledger.generatePreviousYearReport();
                     break;
                 case "5":
-                    System.out.print("Enter vendor name: ");
+                    System.out.print("Enter to/from name: ");
                     String vendorName = scanner.nextLine();
                     ledger.searchByVendor(vendorName);
                     break;

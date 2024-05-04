@@ -13,11 +13,6 @@ public class Ledger {
     private static final String FILE_PATH = "src/main/java/com/pluralsight/files/ledger.csv";
     private Scanner scanner;
 
-    public Ledger() {
-        entries = new ArrayList<>();
-        loadEntriesFromFile();
-    }
-
     public Ledger(Scanner scanner) {
         this.scanner = scanner;
         entries = new ArrayList<>();
@@ -52,7 +47,7 @@ public class Ledger {
                 startIndex += batchSize;
                 if (startIndex < totalEntries) {
                     System.out.print("Press Enter to continue...");
-                    scanner.nextLine(); // Wait for user to press Enter before printing the next batch
+                    scanner.nextLine();
                 }
             }
         }
@@ -60,8 +55,8 @@ public class Ledger {
 
     public void generateMonthToDateReport() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate startDateOfMonth = currentDate.withDayOfMonth(1); // Get the first day of the current month
-        LocalDate endDateOfMonth = currentDate; // Current date
+        LocalDate startDateOfMonth = currentDate.withDayOfMonth(1);
+        LocalDate endDateOfMonth = currentDate;
 
         List<LedgerEntry> monthToDateEntries = filterEntries(startDateOfMonth, endDateOfMonth);
 
@@ -70,8 +65,8 @@ public class Ledger {
 
     public void generateYearToDateReport() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate startDateOfYear = LocalDate.of(currentDate.getYear(), 1, 1); // Get the first day of the current year
-        LocalDate endDateOfYear = currentDate; // Current date
+        LocalDate startDateOfYear = LocalDate.of(currentDate.getYear(), 1, 1);
+        LocalDate endDateOfYear = currentDate;
 
         List<LedgerEntry> yearToDateEntries = filterEntries(startDateOfYear, endDateOfYear);
 
@@ -80,8 +75,8 @@ public class Ledger {
 
     public void generatePreviousMonthReport() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate startDateOfPreviousMonth = currentDate.minusMonths(1).withDayOfMonth(1); // Get the first day of the previous month
-        LocalDate endDateOfPreviousMonth = currentDate.minusMonths(1); // Last day of the previous month
+        LocalDate startDateOfPreviousMonth = currentDate.minusMonths(1).withDayOfMonth(1);
+        LocalDate endDateOfPreviousMonth = currentDate.minusMonths(1);
 
         List<LedgerEntry> previousMonthEntries = filterEntries(startDateOfPreviousMonth, endDateOfPreviousMonth);
 
@@ -90,8 +85,8 @@ public class Ledger {
 
     public void generatePreviousYearReport() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate startDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 1, 1); // Get the first day of the previous year
-        LocalDate endDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 12, 31); // Last day of the previous year
+        LocalDate startDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 1, 1);
+        LocalDate endDateOfPreviousYear = LocalDate.of(currentDate.getYear() - 1, 12, 31);
 
         List<LedgerEntry> previousYearEntries = filterEntries(startDateOfPreviousYear, endDateOfPreviousYear);
 

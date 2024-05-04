@@ -35,7 +35,6 @@ public class LedgerEntry {
         return amount;
     }
 
-    @Override
     public String toString() {
         return "Date: " + date + ", Time: " + time + ", Description: " + description + ", Vendor: " + vendor + ", Amount: " + amount;
     }
